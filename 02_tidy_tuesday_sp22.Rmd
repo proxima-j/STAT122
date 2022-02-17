@@ -1,0 +1,67 @@
+---
+title: 'Tidy Tuesday #2'
+author: "Jenny Li"
+output: 
+  html_document:
+    df_print: paged
+    code_download: true
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+
+```{r libraries}
+library(tidyverse)     # for graphing and data cleaning
+library(lubridate)     # for date manipulation
+library(ggthemes)      # for even more plotting themes
+library(janitor)       # for cleaning variable names
+theme_set(theme_minimal()) # My favorite ggplot() theme :)
+```
+
+## Data choice 1: 
+
+```{r}
+# Read in the data for the week
+airmen <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-02-08/airmen.csv')
+
+
+# If the code above gives an error, uncomment the code below and use it instead. 
+# You will need to install the tidytuesdayR package first.
+
+# library(tidytuesdayR)
+# 
+# tuesdata <- tidytuesdayR::tt_load('2022-02-08')
+# tuesdata <- tidytuesdayR::tt_load(2022, week = 6)
+
+# airmen <- tuesdata$airmen
+```
+
+The first choice for this week's data is about Tuskegee Airmen. Read more about it, including definitions of variables, [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-02-08/readme.md). 
+
+## Data choice 2: 
+
+The second data set for this week is a little different. It is part of the `#DuBoisChallenge` where you will attempt to recreate visualizations made by W.E.B. DuBois for the 1900 Paris Exposition. This week it is even more important than usual to do some background reading. It minimum, please read the summary on the [TidyTuesday page](https://github.com/ajstarks/dubois-data-portraits/tree/master/challenge/2022). There are some links on that page. I also like this [resource](https://publicdomainreview.org/collection/w-e-b-du-bois-hand-drawn-infographics-of-african-american-life-1900), which displays many of the graphs.
+
+To read in the data for this week, you will have to load the data manually. To do so, first go to the [github repository page](https://github.com/ajstarks/dubois-data-portraits/tree/master/challenge/2022), then select the folder for the challenge that you would like to try. You will need to download each of the .csv files in this folder. You can do so by clicking on the .csv file, which should show you the file in github, then select "Raw" in the upper-right of the data. This should open the file in raw format, and you can copy and paste the URL into the readr::read_csv() method. I've shown how to load the data for the first challenge down below:
+
+```{r}
+# Read in the data for the week
+# Data for Challenge 1:
+tam_aircraft <- readr::read_csv('https://raw.githubusercontent.com/ajstarks/dubois-data-portraits/master/challenge/2022/challenge01/tam-aircraft.csv')
+tam_citations <- readr::read_csv("https://raw.githubusercontent.com/ajstarks/dubois-data-portraits/master/challenge/2022/challenge01/tam-citations.csv")
+tam <- readr::read_csv("https://raw.githubusercontent.com/ajstarks/dubois-data-portraits/master/challenge/2022/challenge01/tam.csv")
+
+```
+
+A couple suggestions/thoughts for this week:
+
+1. First, decide which graph to try to replicate. First, try to use one of the graphs you're familiar with to get close to looking like the DuBois graph you are replicating. Then, change some of the details, like background color (`plot.background` in `theme()`), labels, and colors. To match colors well, you might add this [ColorPick Eyedropper](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg?hl=en) Chrome extension that allows you to click on a color and gives you back the hex color, which you can use in R as a color (eg. #FFFFFF is white). Lastly try to add all the details. Do your best, but try not to spend more than 1-2 hours total.
+
+2. The variable names in the datasets reflect the variable names and values used by W.E.B. DuBois. Many of these words are now considered offensive. I think it is ok to use these words to replicate and pay homage to DuBois' work. But please be respectful of each other as you're discussing the data.
+
+
+When you are finished, please delete all the unneeded code and instructions and uncomment (delete the `#`) in the options section of code at the top. If you feel up for it, we encourage you to tweet out your graph with the `#TidyTuesday` hashtag and tag `@lisalendway` (Prof. Lisa) and `@Sintripetal` (Prof. Lauren). See the Tidy Tuesday description file if you want to use our `@MacTidyTuesday` Twitter account to do that.  If you want to post on Twitter, be sure to add that. If you need help, ask. Also, consider adding a caption or tag label with your name and source of the dataset. You can do this by adding something like: `labs(caption = "Plot created by YOURNAME, data from DATASOURCE")` to your plot code. Also MAKE SURE TO ADD ALT TEXT TO YOUR PLOTS (you'll b graded on that this week), there are good tips on the [TidyTuesday github page](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-02-15/readme.md)
+
